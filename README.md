@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌸 PMS栄養辞典
 
-## Getting Started
+PMSの不調から栄養素を逆引きできる、サポートプログラム参加者向けの栄養辞典アプリです。
 
-First, run the development server:
+> 「むくみ」「頭痛」「イライラ」などの不調をタップするだけで、関連する栄養素・食材・摂取目安がすぐわかります。
+
+---
+
+## 画面
+
+<!-- スクリーンショットを撮ったら下記に追加してください -->
+<!-- ![トップページ](docs/top.png) -->
+<!-- ![不調一覧](docs/symptoms.png) -->
+<!-- ![栄養素詳細](docs/nutrient.png) -->
+
+---
+
+## 機能
+
+- 🔍 **不調から逆引き**：7カテゴリの不調（むくみ・頭痛・イライラ・疲労・肌荒れ・便秘・睡眠）から関連栄養素を検索
+- 💊 **栄養素詳細**：14種の栄養素の働き・豊富な食材・1日の摂取目安を表示
+- 🔗 **不調↔栄養素のクロスリンク**：栄養素から関連する不調へも移動可能
+- 📱 **スマホ最適化**：LINEのURLから開くことを想定したモバイルファーストUI
+
+---
+
+## 技術スタック
+
+| カテゴリ | 技術 |
+|---|---|
+| フレームワーク | Next.js 16（App Router） |
+| 言語 | TypeScript |
+| スタイリング | Tailwind CSS v4 |
+| データベース | Supabase（PostgreSQL） |
+| デプロイ | Vercel |
+
+---
+
+## ローカル開発
 
 ```bash
+# 依存パッケージのインストール
+npm install
+
+# .env.local を作成して環境変数を設定
+NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+
+# 開発サーバー起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`supabase-schema.sql` をSupabaseのSQL Editorで実行すると、テーブルと初期データが作成されます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 画面遷移
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+/                    トップページ
+/symptoms            不調カテゴリ一覧
+/symptoms/:id        不調詳細 + 関連栄養素
+/nutrients           栄養素一覧（カテゴリ別）
+/nutrients/:id       栄養素詳細
+```
